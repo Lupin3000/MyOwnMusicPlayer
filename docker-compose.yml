@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  fpm:
+    image: php:7.3-rc-fpm-alpine3.8
+    container_name: php
+    volumes:
+      - ./config/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./lib:/var/www/html
+
+  web:
+    image: nginx:stable-alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./config/default.conf:/etc/nginx/conf.d/default.conf
+      - ./lib:/var/www/html
+    links:
+      - fpm
+    depends_on:
+      - fpm
+
+  ftp:
+    image: avenus/vsftpd-alpine
+    container_name: vsftpd
+    ports:
+      - "2121:21"
+      - "21100-21110:21100-21110"
+    volumes:
+      - ./lib/mp3:/home/user/
+    environment:
+      - FTP_USER=user
+      - FTP_PASS=test123
+      - PASV_ADDRESS=5.6.7.8
+      - PASV_MIN=21100
+      - PASV_MAX=21110
+    links:
+      - web
+    depends_on:
+      - web
