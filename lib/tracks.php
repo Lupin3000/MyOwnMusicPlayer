@@ -2,7 +2,7 @@
 include './class/mp3file.class.php';
 
 $domain = $_SERVER['REQUEST_SCHEME'] . '://'. $_SERVER['HTTP_HOST'];
-$directory = '/mp3/';
+$directory = './mp3/';
 $folder_tracks = array_map('basename', glob("mp3/*.mp3"));
 $track_list = array();
 
@@ -16,7 +16,8 @@ foreach ($folder_tracks as $value) {
   );
 }
 
-$response = array('url' => $domain . $directory, 'tracks' => $track_list);
+$response = array('url' => $domain . ltrim($directory, '.'),
+                  'tracks' => $track_list);
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
