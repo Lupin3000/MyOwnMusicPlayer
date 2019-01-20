@@ -7,7 +7,7 @@ Simple MP3 music player via docker alpine images (_nginx, php, ftp_)
 - Docker
 - Docker-Compose
 
-## Create HTTP auth users
+## HTTP auth users:
 
 ```shell
 # create new file and add first user
@@ -16,32 +16,23 @@ $ htpasswd -c ./lib/.htpasswd testuser_a
 # add other user to existing file
 $ htpasswd ./lib/.htpasswd testuser_b
 ```
-## Change server port
+## Webserver port:
 
-The port configuration is done via docker-compose.yml, here change following value:
+The webserver port configuration is done via file: `.env`. You need to change variables before you startup the environment.
 
-```yaml
-    web:
-      ports:
-        - "80:80"
-```
+## FTP server configuration:
 
-## Change FTP configuration
+The FTP configuration is done via via file: `.env`. You need to change variables before you startup the environment.
 
-The FTP configuration is done via docker-compose.yml, here change following values:
-
-```yaml
-    environment:
-      - FTP_USER=user
-      - FTP_PASS=test123
-      - PASV_ADDRESS=5.6.7.8
-      - PASV_MIN=21100
-      - PASV_MAX=21110
-```
-
-## Run application
+## Run application:
 
 ```shell
-# run application
+# validate YAML
+$ docker-compose config
+
+# run environment
 $ docker-compose run -d
+
+# stop environment
+$ docker-compose down
 ```

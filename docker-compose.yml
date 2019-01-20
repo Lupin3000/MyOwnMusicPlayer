@@ -13,7 +13,7 @@ services:
     container_name: nginx
     restart: always
     ports:
-      - "8080:80"
+      - ${HTML_PORT}:80
     volumes:
       - ./config/default.conf:/etc/nginx/conf.d/default.conf
       - ./lib:/var/www/html
@@ -26,13 +26,13 @@ services:
     image: avenus/vsftpd-alpine
     container_name: vsftpd
     ports:
-      - "2121:21"
+      - ${FTP_PORT}:21
       - "21100-21110:21100-21110"
     volumes:
       - ./lib/mp3:/home/user/
     environment:
-      - FTP_USER=user
-      - FTP_PASS=test123
+      - FTP_USER=${FTP_USER}
+      - FTP_PASS=${FTP_PASS}
       - PASV_ADDRESS=5.6.7.8
       - PASV_MIN=21100
       - PASV_MAX=21110
