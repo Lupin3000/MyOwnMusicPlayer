@@ -1,8 +1,8 @@
 # MyOwnMusicPlayer
 
-Simple MP3 music player via docker alpine images (_nginx, php, ftp_)
+Simple MP3 player via docker alpine images (_nginx, php, ftp_).
 
-## Requirements
+## Requirements:
 
 - Docker
 - Docker-Compose
@@ -26,12 +26,17 @@ The FTP configuration is done via via file: `.env`. You need to change variables
 
 ## Run application:
 
+Do all necessary configurations and start environment via docker-compose. Add some MP3 files (_via FTP or SCP_) into folder `mp3`. Open browser and call you URL.
+
 ```shell
-# validate YAML
+# validate YAML (optional)
 $ docker-compose config
 
 # run environment
 $ docker-compose run -d
+
+# open browser (example localhost with port 8080)
+$ open http://localhost:8080
 
 # stop environment
 $ docker-compose down
