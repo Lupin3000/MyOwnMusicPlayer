@@ -5,7 +5,7 @@
   <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>MP3 Player</title>
+  <title>MyOwnMusicPlayer</title>
   <link rel='stylesheet' href='https://cdn.plyr.io/3.4.7/plyr.css'>
   <link rel="stylesheet" href="./css/main.css">
 </head>
